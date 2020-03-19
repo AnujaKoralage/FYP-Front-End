@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "scss"
         }
       },
       "root": "",
@@ -28,9 +28,24 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.scss",
+              "src/assets/css/icons.css",
+              "src/assets/css/ui.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/@amcharts/amcharts4/core.js",
+              "node_modules/@amcharts/amcharts4/charts.js",
+              "node_modules/chart.js/dist/Chart.min.js",
+              "src/assets/js/animated.js",
+              "src/assets/js/chart.js",
+              "src/assets/js/main.js",
+              "src/assets/js/amc.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -93,7 +108,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.scss"
             ],
             "scripts": []
           }
