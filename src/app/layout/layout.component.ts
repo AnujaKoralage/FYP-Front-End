@@ -9,7 +9,6 @@ import 'node_modules/chart.js/dist/Chart.min.js';
 import 'node_modules/@amcharts/amcharts4/themes/animated.js';
 import 'src/assets/js/chart.js';
 import 'src/assets/js/main.js';
-import 'src/assets/js/amc.js';
 
 @Component({
   selector: 'app-layout',
