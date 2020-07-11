@@ -9,14 +9,14 @@
         <h3 class="p-4">Welcome To Login</h3>
         <div class="cryptorio-main-form">
           <form action="" class="text-left">
-            <label for="email">Account Name</label>
-            <input type="text" id="email" name="email" placeholder="Your email/cellphone">
+            <label for="name">Account Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" [(ngModel)]="name">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Please Input Your Password">
+            <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Please Input Your Password">
 
-            <input type="submit" value="Log In" class="crypt-button-red-full">
+            <input [disabled]="name == '' || name == null || name == undefined || password == '' || password == null" type="submit" (click)="logIn()" value="Log In" class="crypt-button-red-full">
           </form>
-          <p class="float-left"><a href="register.html">Sign Up</a></p>
+          <p class="float-left"><a routerLink="/sign-up">Sign Up</a></p>
           <p class="float-right"><a href="forgot.html">Forgot Password</a></p>
         </div>
       </div>

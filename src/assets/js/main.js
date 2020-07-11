@@ -47,23 +47,75 @@ jQuery(document).ready(function () {
     }
     jQuery('.crypt-box-menu').removeClass('active');
   });
-  if (document.getElementById('crypt-candle-chart')) {
-    new TradingView.widget(
-      {
-        "autosize": true,
-        "symbol": "NASDAQ:AAPL",
-        "interval": "1",
-        "timezone": "Etc/UTC",
-        "theme": "Dark",
-        "style": "1",
-        "locale": "en",
-        "toolbar_bg": "rgba(0, 0, 0, 1)",
-        "enable_publishing": true,
-        "hide_side_toolbar": false,
-        "withdateranges": true,
-        "allow_symbol_change": true,
-        "container_id": "crypt-candle-chart"
-      }
-    );
-  }
+  // if (document.getElementById('crypt-candle-chart')) {
+  //   new TradingView.widget(
+  //     {
+  //       "autosize": true,
+  //       "symbol": "FX:EURUSD",
+  //       "interval": "1",
+  //       "timezone": "Etc/UTC",
+  //       "theme": "Dark",
+  //       "style": "1",
+  //       "locale": "en",
+  //       "toolbar_bg": "rgba(0, 0, 0, 1)",
+  //       "enable_publishing": true,
+  //       "hide_side_toolbar": false,
+  //       "withdateranges": true,
+  //       "allow_symbol_change": true,
+  //       "container_id": "crypt-candle-chart"
+  //     }
+  //   );
+  // }
+  // if (document.getElementById('xx12')) {
+  //   new TradingView.widget(
+  //     {
+  //       "symbols": [
+  //         {
+  //           "proName": "FX_IDC:EURUSD",
+  //           "title": "EUR/USD"
+  //         },
+  //         {
+  //           "proName": "BITSTAMP:BTCUSD",
+  //           "title": "BTC/USD"
+  //         },
+  //         {
+  //           "proName": "BITSTAMP:ETHUSD",
+  //           "title": "ETH/USD"
+  //         },
+  //         {
+  //           "description": "",
+  //           "proName": "FX_IDC:INRUSD"
+  //         },
+  //         {
+  //           "description": "",
+  //           "proName": "OANDA:CADJPY"
+  //         },
+  //         {
+  //           "description": "",
+  //           "proName": "OANDA:CHFJPY"
+  //         },
+  //         {
+  //           "description": "",
+  //           "proName": "OANDA:AUDUSD"
+  //         },
+  //         {
+  //           "description": "",
+  //           "proName": "FX_IDC:JPYUSD"
+  //         },
+  //         {
+  //           "description": "",
+  //           "proName": "FX_IDC:LKRUSD"
+  //         },
+  //         {
+  //           "description": "",
+  //           "proName": "OANDA:GBPUSD"
+  //         }
+  //       ],
+  //       "colorTheme": "light",
+  //       "isTransparent": false,
+  //       "displayMode": "compact",
+  //       "locale": "en"
+  //     }
+  //   );
+  // }
 });

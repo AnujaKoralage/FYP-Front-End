@@ -16,6 +16,15 @@ import { CreateEholeComponent } from './pages/create-ehole/create-ehole.componen
 import { InvestEholeComponent } from './pages/invest-ehole/invest-ehole.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {UserService} from './shared/services/user.service';
+import {PaymentService} from './shared/services/payment.service';
+import {NewHttpService} from './shared/services/custom.new.http.service';
+import {CommonService} from './shared/services/common.service';
+import {AuthGuardService} from './shared/services/authGuard.service';
+import {AuthService} from './shared/services/auth.service';
+import {FormsModule} from '@angular/forms';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { SuccessComponent } from './pages/success/success.component';
 
 @NgModule({
   declarations: [
@@ -29,16 +38,31 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     AccountComponent,
     CreateEholeComponent,
     InvestEholeComponent,
-    DashboardComponent
+    DashboardComponent,
+    SuccessComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    Routing
+    FormsModule,
+    Routing,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function  tokenGetter() {
+          return localStorage.getItem('access_token');
+        }
+      }
+    }),
   ],
   providers: [
-    ChartService
+    ChartService,
+    UserService,
+    NewHttpService,
+    CommonService,
+    AuthService,
+    AuthGuardService,
+    PaymentService
   ],
   bootstrap: [AppComponent]
 })

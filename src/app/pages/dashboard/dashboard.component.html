@@ -131,7 +131,7 @@
             <ul class="nav nav-tabs">
               <li role="presentation"><a href="#closed-orders"  class="active" data-toggle="tab">Best E-Holes</a></li>
               <li role="presentation"><a href="#active-orders" data-toggle="tab">Best Traders</a></li>
-              <li role="presentation"><a href="#balance" data-toggle="tab">Balance</a></li>
+              <!--<li role="presentation"><a href="#balance" data-toggle="tab">Balance</a></li>-->
             </ul>
 
             <!-- Tab panes -->
@@ -140,46 +140,22 @@
                 <table class="table table-striped">
                   <thead>
                   <tr>
-                    <th scope="col">Time</th>
-                    <th scope="col">Buy/sell</th>
-                    <th scope="col">Price BTC</th>
-                    <th scope="col">Amount BPS</th>
-                    <th scope="col">Dealt BPS</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Trader Name</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Profit</th>
+                    <th scope="col">Ewallet type</th>
                     <th scope="col">Operation</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-up">Buy</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.0003456</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-down">Sell</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.0003456</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-up">Buy</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.0003456</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-down">Sell</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.0003456</td>
-                    <td>5.3424984</td>
+                  <tr *ngFor="let item of bestEholeArr">
+                    <th>{{item.id}}</th>
+                    <td class="crypt-up">{{item.name}}</td>
+                    <td class="crypt-up">{{item.completedAmount}}</td>
+                    <td class="crypt-up">{{item.profit}}</td>
+                    <td class="crypt-up">{{item.eholeType}}</td>
+                    <td>Completed</td>
                   </tr>
                   </tbody>
                 </table>

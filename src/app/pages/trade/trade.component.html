@@ -2,32 +2,48 @@
   <div class="crypt-gross-market-cap mt-4">
     <br>
     <br>
-    <div class="row">
-      <div class="col-3 col-sm-6 col-md-6 col-lg-6">
-        <div class="row">
-          <div class="col-sm-6 col-md-6 col-lg-6">
-            <p>Last Price BTC</p>
-            <p>0.0234230 $0.04</p>
-          </div>
-          <div class="col-sm-6 col-md-6 col-lg-6">
-            <p>Change BTC</p>
-            <p class="crypt-down">-0.0234230 -3.35%</p>
-          </div>
-        </div>
+    <!--<div class="row">-->
+      <!--<div class="col-3 col-sm-6 col-md-6 col-lg-6">-->
+        <!--<div class="row">-->
+          <!--<div class="col-sm-6 col-md-6 col-lg-6">-->
+            <!--<p>Last Price BTC</p>-->
+            <!--<p>0.0234230 $0.04</p>-->
+          <!--</div>-->
+          <!--<div class="col-sm-6 col-md-6 col-lg-6">-->
+            <!--<p>Change BTC</p>-->
+            <!--<p class="crypt-down">-0.0234230 -3.35%</p>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-3 col-sm-2 col-md-3 col-lg-2">-->
+        <!--<p>High BTC</p>-->
+        <!--<p class="crypt-up">0.435453</p>-->
+      <!--</div>-->
+      <!--<div class="col-3 col-sm-2 col-md-3 col-lg-2">-->
+        <!--<p>Low BTC</p>-->
+        <!--<p class="crypt-down">0.09945</p>-->
+      <!--</div>-->
+      <!--<div class="col-3 col-sm-2 col-md-3 col-lg-2">-->
+        <!--<p>Volume 24Hr</p>-->
+        <!--<p class="crypt-down">12.33445</p>-->
+      <!--</div>-->
+    <!--</div>-->
+      <div class="row">
+      <div class="col-2"></div>
+      <div class="col-4">
+      <label class="my-1 mr-2" for="inlineFormCustomSelectPref">E_Wallets</label>
+              <select class="custom-select my-1 mr-sm-2" (change)="selectEhole($event)" id="inlineFormCustomSelectPref">
+                <option *ngFor="let eh of eholeArray" [value]="eh.id">{{eh.id}}</option>
+              </select>
+</div>
+      <div class="col-4">
+      <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Currency Pair</label>
+              <select class="custom-select my-1 mr-sm-2" (change)="selectCurrencyPair($event)" id="inlineFormCustomSelectPref">
+                <option *ngFor="let it of pairs | keyvalue" [value]="it.value">{{it.key}}</option>
+              </select>
+</div>
+      <div class="col-2"></div>
       </div>
-      <div class="col-3 col-sm-2 col-md-3 col-lg-2">
-        <p>High BTC</p>
-        <p class="crypt-up">0.435453</p>
-      </div>
-      <div class="col-3 col-sm-2 col-md-3 col-lg-2">
-        <p>Low BTC</p>
-        <p class="crypt-down">0.09945</p>
-      </div>
-      <div class="col-3 col-sm-2 col-md-3 col-lg-2">
-        <p>Volume 24Hr</p>
-        <p class="crypt-down">12.33445</p>
-      </div>
-    </div>
   </div>
   <div class="row sm-gutters">
     <!-- <div class="col-md-6 col-lg-6 col-xl-3 col-xxl-2">
@@ -304,30 +320,31 @@
     </div> -->
     <div class="col-md-2">
       <div class="crypt-buy-sell-form">
-        <p>Buy <span class="crypt-up">BTC</span> <span class="fright">Available: <b class="crypt-up">20 BTC</b></span></p>
+        <p> <span class="crypt-up">Buy</span> <span class="fright">Available: <b class="crypt-up">{{availableAmount}} USD</b></span></p>
         <div class="crypt-buy">
           <div class="input-group mb-3">
             <div class="input-group-prepend"> <span class="input-group-text">Price</span> </div>
-            <input type="text" class="form-control" placeholder="0.02323476" readonly>
-            <div class="input-group-append"> <span class="input-group-text">BTC</span> </div>
+            <input type="text" class="form-control" [value]="currentTicker[0].ask" readonly>
+            <div class="input-group-append"> <span class="input-group-text">USD</span> </div>
           </div>
           <div class="input-group mb-3">
-            <div class="input-group-prepend"> <span class="input-group-text">Amount</span> </div>
-            <input type="number" class="form-control">
-            <div class="input-group-append"> <span class="input-group-text">BTC</span> </div>
+            <div class="input-group-prepend"> <span class="input-group-text">Place</span> </div>
+            <input [min]="1" type="number" class="form-control" (keyup)="buyAmountChange($event)" [(ngModel)]="buyAmount">
+            <div class="input-group-append"> <span class="input-group-text">USD</span> </div>
           </div>
           <div class="input-group mb-3">
-            <div class="input-group-prepend"> <span class="input-group-text">Total</span> </div>
-            <input type="text" class="form-control" readonly>
-            <div class="input-group-append"> <span class="input-group-text">BTC</span> </div>
+            <div class="input-group-prepend"> <span class="input-group-text">Type</span> </div>
+            <select (change)="setSellOrderType($event)" class="form-control">
+               <option *ngFor="let it of orderTypes | keyvalue" [value]="it.value">{{it.key}}</option>
+             </select>
           </div>
           <div>
-            <p>Fee: <span class="fright">100%x0.2=0.02</span></p>
+            <p>Fee: <span class="fright">0.02 USD</span></p>
           </div>
           <div class="text-center mt-3 mb-3 crypt-up">
             <p>You will approximately pay</p>
             <h4>0.09834 BTC</h4></div>
-          <div class="menu-green"><a href="" class="crypt-button-green-full">Buy</a></div>
+          <div class="menu-green"><button (click)="placeBuyOrder()" [disabled]="buyAmountError" class="crypt-button-green-full">Buy</button></div>
         </div>
       </div>
     </div>
@@ -336,34 +353,36 @@
       <div class="tradingview-widget-container mb-3">
         <div id="crypt-candle-chart"></div>
       </div>
+
       <!--<div id="depthchart" class="depthchart h-40 crypt-dark-segment"></div>-->
     </div>
     <div class="col-md-2">
       <div class="crypt-buy-sell-form">
-        <p>Sell <span class="crypt-down">BTC</span> <span class="fright">Available: <b class="crypt-down">20 BTC</b></span></p>
+        <p> <span class="crypt-down">Sell</span> <span class="fright">Available: <b class="crypt-down">{{availableAmount}} USD</b></span></p>
         <div class="crypt-sell">
           <div class="input-group mb-3">
             <div class="input-group-prepend"> <span class="input-group-text">Price</span> </div>
-            <input type="text" class="form-control" placeholder="0.02323476" readonly>
-            <div class="input-group-append"> <span class="input-group-text">BTC</span> </div>
+            <input type="text" class="form-control" [value]="currentTicker[0].bid" readonly>
+            <div class="input-group-append"> <span class="input-group-text">USD</span> </div>
           </div>
           <div class="input-group mb-3">
-            <div class="input-group-prepend"> <span class="input-group-text">Amount</span> </div>
-            <input type="number" class="form-control">
-            <div class="input-group-append"> <span class="input-group-text">BTC</span> </div>
+            <div class="input-group-prepend"> <span class="input-group-text">Place</span> </div>
+            <input type="number" [min]="1" (keyup)="sellAmountChange($event)" class="form-control" [(ngModel)]="sellAmount">
+            <div class="input-group-append"> <span class="input-group-text">USD</span> </div>
           </div>
           <div class="input-group mb-3">
-            <div class="input-group-prepend"> <span class="input-group-text">Total</span> </div>
-            <input type="text" class="form-control" readonly>
-            <div class="input-group-append"> <span class="input-group-text">BTC</span> </div>
-          </div>
+                      <div class="input-group-prepend"> <span class="input-group-text">Type</span> </div>
+                      <select (change)="setBuyOrderType($event)" class="form-control">
+                         <option *ngFor="let it of orderTypes | keyvalue" [value]="it.value">{{it.key}}</option>
+                       </select>
+                    </div>
           <div>
-            <p>Fee: <span class="fright">100%x0.2=0.02</span></p>
+            <p>Fee: <span class="fright">0.02 USD</span></p>
           </div>
           <div class="text-center mt-3 mb-3 crypt-down">
             <p>You will approximately pay</p>
             <h4>0.09834 BTC</h4></div>
-          <div><a href="" class="crypt-button-red-full">Sell</a></div>
+          <div><button [disabled]="sellAmountError" (click)="placeSellOrder()" class="crypt-button-red-full">Sell</button></div>
         </div>
       </div>
     </div>
@@ -685,7 +704,7 @@
           <div>
             <ul class="nav nav-tabs">
               <li role="presentation"><a href="#active-orders" class="active" data-toggle="tab">Active Orders</a></li>
-              <li role="presentation"><a href="#closed-orders" data-toggle="tab">Closed Orders</a></li>
+              <li role="presentation"><a href="#closed-orders" data-toggle="tab">Completed Orders</a></li>
               <li role="presentation"><a href="#balance" data-toggle="tab">Balance</a></li>
             </ul>
             <div class="tab-content">
@@ -693,104 +712,64 @@
                 <table class="table table-striped">
                   <thead>
                   <tr>
-                    <th scope="col">Time</th>
-                    <th scope="col">Buy/sell</th>
-                    <th scope="col">Price BTC</th>
-                    <th scope="col">Amount BPS</th>
-                    <th scope="col">Dealt BPS</th>
-                    <th scope="col">Operation</th>
+                    <th scope="col"></th>
+                    <th scope="col">Pair</th>
+                    <th scope="col">Buy/Sell</th>
+                    <th scope="col">Start Price</th>
+                    <th scope="col">Size (USD)</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Profit</th>
+                    <th scope="col">Action</th>
                   </tr>
                   </thead>
+                  <tbody>
+                   <tr *ngFor="let it of currentEholeActiveOrders">
+                   <td>{{it.id}}</td>
+                   <td>{{it.orderSymbol}}</td>
+                   <td>{{it.orderAction}}</td>
+                   <td>{{it.startPrice}}</td>
+                   <td>{{it.orderSize}}</td>
+                   <td>{{it.orderType}}</td>
+                   <td>{{it.profit}}</td>
+                   <td>
+                   <button style="width: fit-content" *ngIf="it.orderAction == orderAction.BUY" (click)="completeOrder(it.id, orderAction.BUY)" class="crypt-button-green-full"> Complete</button>
+                   <button style="width: fit-content" *ngIf="it.orderAction == orderAction.SELL" (click)="completeOrder(it.id, orderAction.SELL)" class="crypt-button-red-full"> Complete</button>
+                   </td>
+                   </tr>
+                  </tbody>
                 </table>
-                <div class="no-orders text-center"><img src="/assets/images/empty.png" alt="no-orders"></div>
+                <div *ngIf="currentEholeActiveOrders.length == 0" class="no-orders text-center"><img src="/assets/images/empty.png" alt="no-orders"></div>
               </div>
               <div role="tabpanel" class="tab-pane" id="closed-orders">
                 <table class="table table-striped">
                   <thead>
                   <tr>
-                    <th scope="col">Time</th>
-                    <th scope="col">Buy/sell</th>
-                    <th scope="col">Price BTC</th>
-                    <th scope="col">Amount BPS</th>
-                    <th scope="col">Dealt BPS</th>
-                    <th scope="col">Operation</th>
+                     <th scope="col"></th>
+                      <th scope="col">Pair</th>
+                                        <th scope="col">Buy/Sell</th>
+                                        <th scope="col">Start Price</th>
+                                        <th scope="col">Start Price</th>
+                                        <th scope="col">Size (USD)</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Profit</th>
+                                        <th scope="col">Status</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-up">Buy</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.0003456</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-down">Sell</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.0003456</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-up">Buy</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.0003456</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-down">Sell</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.0003456</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-up">Buy</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.0003456</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-down">Sell</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.0003456</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-up">Buy</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.0003456</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-down">Sell</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.000056</td>
-                    <td class="crypt-down">0.0003456</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>22:35:59</th>
-                    <td class="crypt-up">Buy</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.000056</td>
-                    <td class="crypt-up">0.0003456</td>
-                    <td>5.3424984</td>
+                  <tr *ngFor="let it of currentEholeCompleteOrders">
+                    <td>{{it.id}}</td>
+                                       <td>{{it.orderSymbol}}</td>
+                                       <td>{{it.orderAction}}</td>
+                                       <td>{{it.startPrice}}</td>
+                                       <td>{{it.endPrice}}</td>
+                                       <td>{{it.orderSize}}</td>
+                                       <td>{{it.orderType}}</td>
+                                       <td>{{it.profit}}</td>
+                                       <td>{{it.profitStatus}}</td>
                   </tr>
                   </tbody>
                 </table>
+                <div *ngIf="currentEholeCompleteOrders.length == 0" class="no-orders text-center"><img src="/assets/images/empty.png" alt="no-orders"></div>
               </div>
               <div role="tabpanel" class="tab-pane" id="balance">
                 <table class="table table-striped">
@@ -806,36 +785,6 @@
                     <th>BTC</th>
                     <td>0.0000564</td>
                     <td>6.6768876</td>
-                  </tr>
-                  <tr>
-                    <th>ETC</th>
-                    <td>0.000056</td>
-                    <td>5.3424984</td>
-                  </tr>
-                  <tr>
-                    <th>LTC</th>
-                    <td>0.0000234</td>
-                    <td>4.3456600</td>
-                  </tr>
-                  <tr>
-                    <th>XMR</th>
-                    <td>0.0000234</td>
-                    <td>4.3456600</td>
-                  </tr>
-                  <tr>
-                    <th>BIT</th>
-                    <td>0.0000567</td>
-                    <td>4.3456600</td>
-                  </tr>
-                  <tr>
-                    <th>EGF</th>
-                    <td>0.0000234</td>
-                    <td>4.3456600</td>
-                  </tr>
-                  <tr>
-                    <th>EER</th>
-                    <td>0.0000567</td>
-                    <td>4.3456600</td>
                   </tr>
                   </tbody>
                 </table>

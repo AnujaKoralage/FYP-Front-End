@@ -1,5 +1,6 @@
 export enum CurrencyPair {
   BTC_ARDR = 'BTC_ARDR',
+  EUR_USD = 'OANDA:EURUSD',
   BTC_ATOM = 'BTC_ATOM',
   BTC_BAT = 'BTC_BAT',
   BTC_BCH = 'BTC_BCH',
@@ -112,5 +113,5 @@ export enum CurrencyPair {
  USDT_XMR = '',
  USDT_XRP = '',
  USDT_ZEC = '',
- USDT_ZRX = '',
+ USDT_ZRX = ''
 }

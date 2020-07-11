@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import * as CryptoJS from 'crypto-js';
+import {Router} from '@angular/router';
+import {UserService} from '../../shared/services/user.service';
+import {NewHttpService} from '../../shared/services/custom.new.http.service';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +12,24 @@ import * as CryptoJS from 'crypto-js';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private userService: UserService,
+              private httpN: NewHttpService,
+              private router: Router) { }
+  public name;
+  public nameError;
+  public nameErrorMesssage;
+  public password;
+  public passwordError;
+  public passwordErrorMessage;
 
   ngOnInit() {
     this.ddd();
+  }
+  public logIn() {
+    this.httpN.getAccessToken(this.name, this.password).subscribe(value1 => {
+      this.router.navigate(['/dashboard']);
+    });
   }
   public ddd() {
 

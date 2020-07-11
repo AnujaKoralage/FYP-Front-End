@@ -64,28 +64,28 @@
                   <p>Details - <a href="" class="crypt-up">Get VIP Now</a></p>
                   <form class="deposit-form">
                     <div class="crypt-radio-boxed">
-                      <input type="radio" name="payment-amount" id="payment-btc-amount1" class="payment-amount">
+                      <input type="radio" value="30000" (click)="setAmount($event)" name="payment-amount" id="payment-btc-amount1" class="payment-amount">
                       <label for="payment-btc-amount1">$ 30000 <img src="/assets/images/vip.svg" width="40" alt=""></label>
                       <div class="check"></div>
                     </div>
                     <div class="crypt-radio-boxed">
-                      <input type="radio" name="payment-amount" id="payment-btc-amount2" class="payment-amount"><label for="payment-btc-amount2">$ 20000 <img src="/assets/images/vip.svg" width="40" alt=""></label>
+                      <input type="radio" name="payment-amount" (click)="setAmount($event)" value="20000" id="payment-btc-amount2" class="payment-amount"><label for="payment-btc-amount2">$ 20000 <img src="/assets/images/vip.svg" width="40" alt=""></label>
                       <div class="check"></div>
                     </div>
                     <div class="crypt-radio-boxed">
-                      <input type="radio" name="payment-amount" id="payment-btc-amount3" class="payment-amount"><label for="payment-btc-amount3">$ 10000 <img src="/assets/images/vip.svg" width="40" alt=""></label>
+                      <input type="radio" name="payment-amount" (click)="setAmount($event)" value="10000" id="payment-btc-amount3" class="payment-amount"><label for="payment-btc-amount3">$ 10000 <img src="/assets/images/vip.svg" width="40" alt=""></label>
                       <div class="check"></div>
                     </div>
                     <div class="crypt-radio-boxed">
-                      <input type="radio" name="payment-amount" id="payment-btc-amount4" class="payment-amount"><label for="payment-btc-amount4">$ 5000 </label>
+                      <input type="radio" name="payment-amount" (click)="setAmount($event)" value="5000" id="payment-btc-amount4" class="payment-amount"><label for="payment-btc-amount4">$ 5000 </label>
                       <div class="check"></div>
                     </div>
                     <div class="crypt-radio-boxed">
-                      <input type="radio" name="payment-amount" id="payment-btc-amount5" class="payment-amount"><label for="payment-btc-amount5">$ 2000 </label>
+                      <input type="radio" name="payment-amount" value="2000" (click)="setAmount($event)" id="payment-btc-amount5" class="payment-amount"><label for="payment-btc-amount5">$ 2000 </label>
                       <div class="check"></div>
                     </div>
                     <div class="crypt-radio-boxed">
-                      <input type="radio" name="payment-amount" id="payment-btc-amount6" class="payment-amount"><label for="payment-btc-amount6">$ 1000 </label>
+                      <input type="radio" name="payment-amount" value="1000" (click)="setAmount($event)" id="payment-btc-amount6" class="payment-amount"><label for="payment-btc-amount6">$ 1000 </label>
                       <div class="check"></div>
                     </div>
                     <div class="form-group mt-2">
@@ -98,7 +98,7 @@
                     </div>
                     <div class="input-group input-text-select mb-3">
                       <div class="input-group-prepend">
-                        <input style="height: auto" placeholder="Amount" type="text" class="form-control crypt-input-lg">
+                        <input style="height: auto" name="amount" placeholder="Amount" type="text" [(ngModel)]="amount" class="form-control crypt-input-lg">
                       </div>
                       <select class="custom-select" name="inputGroupSelect01">
                         <option value="1">USD</option>
@@ -108,59 +108,64 @@
                     </div>
                     <div class="text-center crypt-up mt-5 mb-5">
                       <p>You will approximately pay</p>
-                      <h3>$500</h3>
+                      <h3>${{amount}}</h3>
                     </div>
-                    <a href="" class="crypt-button-red-full">Proceed To Payment</a>
+                    <!--<a href="" class="crypt-button-red-full">Proceed To Payment</a>-->
+                    <button (click)="proceedPayment()" class="crypt-button-green-full">Proceed To Payment</button>
                   </form>
                 </div>
                 <div class="tab-pane fade" id="v-pills-zilliqua-btc-withdrawl" role="tabpanel" aria-labelledby="v-pills-zilliqua-btc-withdrawl-tab">
-                  <h4 class="crypt-down">Wire bank transfer</h4>
-                  <p><i class="pe-7s-info"></i> Standard bank transfer will be made up to 2 workdays</p>
+                  <h4 class="crypt-down">Online Transfer</h4>
+                  <p><i class="pe-7s-info"></i> Online Transfer to Your Paypal Account</p>
                   <form>
-                    <div class="input-group mb-3">
-                      <input type="text" placeholder="Amount" class="form-control" name="amount">
-                      <div class="input-group-append">
-                        <span class="input-group-text">USD</span>
-                      </div>
+                    <div class="form-group">
+                      <input type="number" placeholder="Amount" (keyup)="validateWithdrawAmount()" class="form-control" name="amount" [(ngModel)]="withdrawAmount">
+                      <label class="alert-danger" *ngIf="amountError">{{amountErrorMessage}}</label>
+                      <!--<div class="input-group-append">-->
+                        <!--<span class="input-group-text">USD</span>-->
+                      <!--</div>-->
                     </div>
-                    <div class="input-group mb-3">
-                      <input type="text" placeholder="Bank Account Number" class="form-control" name="bank-account">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">Other Address</button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="#">234235234</a>
-                          <a class="dropdown-item" href="#">2343453453</a>
-                          <a class="dropdown-item" href="#">234234234234</a>
-                        </div>
-                      </div>
+                    <!--<div class="input-group mb-3">-->
+                      <!--<input type="text" placeholder="Bank Account Number" class="form-control" name="bank-account">-->
+                      <!--<div class="input-group-append">-->
+                        <!--<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">Other Address</button>-->
+                        <!--<div class="dropdown-menu">-->
+                          <!--<a class="dropdown-item" href="#">234235234</a>-->
+                          <!--<a class="dropdown-item" href="#">2343453453</a>-->
+                          <!--<a class="dropdown-item" href="#">234234234234</a>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Name" name="name" [(ngModel)]="name">
+                      <label class="alert-danger" *ngIf="name.length < 1">Please Enter Valid Name</label>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Name" name="name">
+                      <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="email">
+                      <!--<label class="alert-danger" *ngIf="emaill.length < 5">Enter Proper Email</label>-->
                     </div>
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Swift Code" name="swift">
-                    </div>
-                    <div class="form-group">
-                      <div class="form-group">
-                        <select class="form-control">
-                          <option>Country</option>
-                          <option>United States</option>
-                          <option>India</option>
-                          <option>Japan</option>
-                          <option>Korea</option>
-                          <option>China</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="recipient-btc">
-                        <label class="form-check-label" for="recipient-btc">
-                          Add To recipient
-                        </label>
-                      </div>
-                    </div>
-                    <a href="" class="crypt-button-red-full">Initiate Withdraw</a>
+                    <!--<div class="form-group">-->
+                      <!--<div class="form-group">-->
+                        <!--<select class="form-control">-->
+                          <!--<option>Country</option>-->
+                          <!--<option>United States</option>-->
+                          <!--<option>India</option>-->
+                          <!--<option>Japan</option>-->
+                          <!--<option>Korea</option>-->
+                          <!--<option>China</option>-->
+                        <!--</select>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<div class="form-check">-->
+                        <!--<input class="form-check-input" type="checkbox" id="recipient-btc">-->
+                        <!--<label class="form-check-label" for="recipient-btc">-->
+                          <!--Add To recipient-->
+                        <!--</label>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                    <!--<a href="" class="crypt-button-red-full">Initiate Withdraw</a>-->
+                    <button [disabled]="amountError" class="crypt-button-green-full" (click)="withdrawAmountQ()">Initiate Withdraw</button>
                   </form>
                 </div>
                 <div class="tab-pane fade" id="v-pills-zilliqua-btc-history" role="tabpanel" aria-labelledby="v-pills-zilliqua-btc-history-tab">

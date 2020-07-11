@@ -5,54 +5,22 @@
         <table class="table table-striped crypt-table-market-cap mt-4">
           <thead>
           <tr>
-            <th scope="col"></th>
-            <th scope="col" class="text-left pl-2">Name</th>
-            <th scope="col">Target Cap</th>
-            <th scope="col">Gathered Capital</th>
+            <th scope="col">Id</th>
+            <th scope="col" class="text-left pl-2">Completed In</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">Completed Amount</th>
             <!-- <th scope="col">24 Hour Volume</th> -->
-            <th scope="col">Change</th>
+            <!--<th scope="col">Type</th>-->
             <!-- <th scope="col">7 days</th> -->
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <th>1</th>
-            <td class="text-left pl-2 font-weight-bold"><img src="assets/images/coins/btc.png" width="20" class="pr-1 crypt-market-cap-logo" alt="coin"> <a href="index.html">Bitcoin</a></td>
-            <td>$239048209</td>
-            <td>$4559</td>
-            <td class="crypt-down"> -0.04%</td>
-          </tr>
-          <tr>
-            <th>2</th>
-            <td class="text-left pl-2 font-weight-bold"><img src="assets/images/coins/eth.png" width="20" class="pr-1 crypt-market-cap-logo" alt="coin"> <a href="index.html">Ethrium</a></td>
-            <td>$239048209</td>
-            <td>$4559</td>
-            <td class="crypt-down"> -4.04%</td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td class="text-left pl-2 font-weight-bold"><img src="assets/images/coins/ltc.png" width="20" class="pr-1 crypt-market-cap-logo" alt="coin"> <a href="index.html">Litecoin</a></td>
-            <td>$239048209</td>
-            <td>$4559</td>
-            <td class="crypt-up">3.04%</td>
-          </tr>
-          <tr>
-            <th>4</th>
-            <td class="text-left pl-2 font-weight-bold"><img src="assets/images/coins/btcc.png" width="20" class="pr-1 crypt-market-cap-logo" alt="coin">  <a href="index.html">
-              BitCoin Cash
-            </a></td>
-            <td>$239048209</td>
-            <td>$4559</td>
-            <td class="crypt-down">-0.45%</td>
-          </tr>
-          <tr>
-            <th>5</th>
-            <td class="text-left pl-2 font-weight-bold"><img src="assets/images/coins/xrp.png" width="20" class="pr-1 crypt-market-cap-logo" alt="coin"> <a href="index.html">
-              XRP
-            </a></td>
-            <td>$239048209</td>
-            <td>$4559</td>
-            <td class="crypt-up">6.04%</td>
+          <tr *ngFor="let ehole of activeEholeArray">
+            <th>{{ehole.id}}</th>
+            <td class="text-left pl-2 font-weight-bold"><img src="assets/images/coins/btc.png" width="20" class="pr-1 crypt-market-cap-logo" alt="coin">{{ehole.completionDate}}</td>
+            <td>{{ehole.totalAmount}}</td>
+            <td>{{ehole.completedAmount}}</td>
+            <!--<td class="crypt-down"> -0.04%</td>-->
           </tr>
 
           </tbody>
@@ -67,48 +35,39 @@
           <form>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="inputEmail4">Email</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                <label class="design" for="inputEmail4">Email</label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="dark">
               </div>
               <div class="form-group col-md-6">
-                <label for="inputPassword4">Password</label>
-                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                <label class="design" for="value">Value</label>
+                <input type="number" class="form-control" id="value" (keyup)="checkAmount()" placeholder="Value" name="dark" [(ngModel)]="amount">
+                <label *ngIf="amountError" class="bg-danger">{{amountErrorMessage}}</label>
               </div>
             </div>
-            <div class="form-group">
-              <label for="inputAddress">Address</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-            </div>
-            <div class="form-group">
-              <label for="inputAddress2">Address 2</label>
-              <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="inputCity">City</label>
-                <input type="text" class="form-control" id="inputCity">
+              <div class="form-row">
+                <section class="dark col-md-12">
+                  <label>
+                    <input class="inputX" type="radio" name="dark" value="0" checked (click)="seletEholeType($event)">
+                    <span class="design"></span>
+                    <span class="text">One Hour E-Wallet</span>
+                  </label>
+
+                  <label>
+                    <input class="inputX" type="radio" value="1" name="dark" (click)="seletEholeType($event)">
+                    <span class="design"></span>
+                    <span class="text">One Day E-Wallet</span>
+                  </label>
+
+                  <label>
+                    <input class="inputX" type="radio" value="2" name="dark" (click)="seletEholeType($event)">
+                    <span class="design"></span>
+                    <span class="text">One Week E-Wallet</span>
+                  </label>
+
+                </section>
               </div>
-              <div class="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
-                </select>
-              </div>
-              <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                  Check me out
-                </label>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <br>
+            <button [disabled]="amountError" (click)="createEhole()" type="submit" class="btn btn-primary">Create</button>
           </form>
         </div>
         <div class="col-lg-1"></div>
@@ -122,46 +81,51 @@
       <div class="crypt-boxed-area">
         <h6 class="crypt-bg-head"><b class="crypt-up">INVEST</b></h6>
         <div class="row no-gutters">
-          <div class="col-md-12">
+          <div *ngIf="selectedEhole != null && selectedEhole != undefined" class="col-md-12">
             <div class="crypt-buy-sell-form">
-              <p>Buy <span class="crypt-up">BTC</span> <span class="fright">Available: <b class="crypt-up">20 BTC</b></span></p>
+              <p>E_Wallet  <span class="crypt-up">
+                <select (change)="selectEhole($event.target.value)">
+                  <option *ngFor="let obj of activeEholeArray" [value]="obj.id">{{obj.id}}</option>
+                </select>
+              </span> <span class="fright">Available: <b class="crypt-up">{{selectedEhole.totalAmount - selectedEhole.completedAmount}} USD</b></span></p>
               <div class="crypt-buy">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Price</span>
+                    <span class="input-group-text">Filled</span>
                   </div>
-                  <input type="text" class="form-control" placeholder="0.02323476" readonly>
+                  <input type="text" class="form-control" [placeholder]="selectedEhole.completedAmount" readonly>
                   <div class="input-group-append">
-                    <span class="input-group-text">BTC</span>
+                    <span class="input-group-text">USD</span>
                   </div>
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Amount</span>
                   </div>
-                  <input type="number" class="form-control">
+                  <input type="number" class="form-control" [placeholder]="selectedEhole.totalAmount" readonly>
                   <div class="input-group-append">
-                    <span class="input-group-text">BTC</span>
+                    <span class="input-group-text">USD</span>
                   </div>
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Total</span>
+                    <span class="input-group-text">Purchase</span>
                   </div>
-                  <input type="text" class="form-control" readonly>
+                  <input type="number" class="form-control" (keyup)="validatePurchaseAmount($event.target.value)" [(ngModel)]="purchaseAmount">
                   <div class="input-group-append">
-                    <span class="input-group-text">BTC</span>
+                    <span class="input-group-text">USD</span>
                   </div>
                 </div>
+                <label class="btn-danger" *ngIf="errorPurchace">Not valid!!</label>
                 <div>
-                  <p>Fee: <span class="fright">100%x0.2 = 0.02</span></p>
+                  <p>Fee: <span class="fright">0.02 USD</span></p>
                 </div>
                 <div class="text-center mt-5 mb-5 crypt-up">
                   <p>You will approximately pay</p>
-                  <h4>0.09834 BTC</h4>
+                  <h4>{{purchaseAmount}}</h4>
                 </div>
                 <div class="menu-green">
-                  <a href="" class="crypt-button-green-full">INVEST</a>
+                  <button [disabled]="errorPurchace" (click)="invest()" class="crypt-button-green-full">INVEST</button>
                 </div>
               </div>
             </div>

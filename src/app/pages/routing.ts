@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {TradeComponent} from './trade/trade.component';
 import {AccountComponent} from './account/account.component';
+import {SuccessComponent} from './success/success.component';
 import {CreateEholeComponent} from './create-ehole/create-ehole.component';
 import {InvestEholeComponent} from './invest-ehole/invest-ehole.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-
+import {AuthGuardService as AuthGuard} from '../shared/services/authGuard.service';
 
 export const PAGE_ROUTES: Routes = [
   {
@@ -19,25 +20,35 @@ export const PAGE_ROUTES: Routes = [
     component : RegisterComponent
   },
   {
+    path : 'payment/success',
+    component : SuccessComponent
+  },
+  {
     path : 'trade',
-    component : TradeComponent
+    component : TradeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path : 'account',
-    component : AccountComponent
+    component : AccountComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'create-ehole',
-    component: CreateEholeComponent
+    component: CreateEholeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'invest-ehole',
-    component: InvestEholeComponent
+    component: InvestEholeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
-  }
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: '**', redirectTo: '/dashboard' }
 ];
 
 @NgModule({
