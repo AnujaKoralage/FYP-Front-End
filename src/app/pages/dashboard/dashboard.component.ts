@@ -32,16 +32,24 @@ export class DashboardComponent implements OnInit {
      public bestEholeArr: EholeObject[] = [];
 
   ngOnInit() {
-
+const that = this;
     this.eholeService.getCompletedEholes().subscribe((value: any[]) => {
       for (let i = 0; i < value.length; i++) {
         let obj = value[i];
-        this.tradeService.getEholeProfits(obj.id).subscribe((data: any) => {
+        that.tradeService.getEholeProfits(obj.id).subscribe((data: any) => {
           if (data > 0) {
-            let name = this.userService.getUserName(UserTypeEnum.TRADER, obj.traderId).subscribe((name: any) => {
-              return name;
+            let name = '';
+            that.userService.getUserName(UserTypeEnum.TRADER, obj.traderId).subscribe((data1: any) => {
+              name = data1;
             });
-            let ehole: EholeObject;
+            let ehole: EholeObject = new class implements EholeObject {
+              completedAmount: any;
+              eholeType: any;
+              id: any;
+              name: any;
+              profit: any;
+              traderId: any;
+            };
             ehole.id = obj.id;
             ehole.completedAmount = obj.completedAmount;
             ehole.eholeType = obj.eholeType;

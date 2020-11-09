@@ -8,118 +8,20 @@
               <div class="crypt-logo"><img src="assets/images/logo.jpg" alt=""></div>
             </div>
             <div class="col-xs-2">
-              <div class="crypt-mega-dropdown-menu"> <a (click)="getWalletDetails()" class="crypt-mega-dropdown-toggle">MY WALLET <i class="pe-7s-angle-down-circle"></i></a>
+              <div *ngIf="isLogin" class="crypt-mega-dropdown-menu"> <a (click)="getWalletDetails()" class="crypt-mega-dropdown-toggle">MY WALLET <i class="pe-7s-angle-down-circle"></i></a>
                 <div class="crypt-mega-dropdown-menu-block">
-                  <div class="crypt-market-status">
-                    <div>
-                      <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active">
+
+                        <div role="tabpanel" class="tab-pane">
                           <table class="table table-striped">
                             <thead>
                             <tr>
-                              <th scope="col">Balance</th>
-                              <th scope="col">{{amount}}</th>
+                              <th style="color: wheat" scope="col">Balance</th>
+                              <th style="color: wheat" scope="col">{{amount}}</th>
                             </tr>
                             </thead>
                           </table>
                         </div>
-                        <!--<div role="tabpanel" class="tab-pane">-->
-                          <!--<table class="table table-striped">-->
-                            <!--<thead>-->
-                            <!--<tr>-->
-                              <!--<th scope="col">Coin</th>-->
-                              <!--<th scope="col">Price</th>-->
-                              <!--<th scope="col">Volume</th>-->
-                              <!--<th scope="col">Change</th>-->
-                            <!--</tr>-->
-                            <!--</thead>-->
-                            <!--<tbody>-->
-                            <!--<tr>-->
-                              <!--<th scope="row">BTC</th>-->
-                              <!--<td class="crypt-down">0.000056</td>-->
-                              <!--<td>5.3424984</td>-->
-                              <!--<td class="crypt-down"><b>-5.4%</b></td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                              <!--<th scope="row">LTC</th>-->
-                              <!--<td>0.0000564</td>-->
-                              <!--<td>6.6768876</td>-->
-                              <!--<td>-6.7%</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                              <!--<th scope="row">DOGE</th>-->
-                              <!--<td class="crypt-up">0.0000234</td>-->
-                              <!--<td>4.3456600</td>-->
-                              <!--<td class="crypt-up">-9.6%</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                              <!--<th scope="row">XMR</th>-->
-                              <!--<td>0.0000567</td>-->
-                              <!--<td>4.3456600</td>-->
-                              <!--<td>-5.6%</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                              <!--<th scope="row">DOGE</th>-->
-                              <!--<td class="crypt-up">0.0000234</td>-->
-                              <!--<td>4.3456600</td>-->
-                              <!--<td class="crypt-up">-9.6%</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                              <!--<th scope="row">XMR</th>-->
-                              <!--<td>0.0000567</td>-->
-                              <!--<td>4.3456600</td>-->
-                              <!--<td>-5.6%</td>-->
-                            <!--</tr>-->
-                            <!--</tbody>-->
-                          <!--</table>-->
-                        <!--</div>-->
-                        <!--<div role="tabpanel" class="tab-pane">-->
-                          <!--<table class="table table-striped">-->
-                            <!--<thead>-->
-                            <!--<tr>-->
-                              <!--<th scope="col">Coin</th>-->
-                              <!--<th scope="col">Price</th>-->
-                              <!--<th scope="col">Volume</th>-->
-                              <!--<th scope="col">Change</th>-->
-                            <!--</tr>-->
-                            <!--</thead>-->
-                            <!--<tbody>-->
-                            <!--<tr>-->
-                              <!--<th scope="row">BTC</th>-->
-                              <!--<td class="crypt-down">0.000056</td>-->
-                              <!--<td>5.3424984</td>-->
-                              <!--<td class="crypt-down"><b>-5.4%</b></td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                              <!--<th scope="row">DOGE</th>-->
-                              <!--<td class="crypt-up">0.0000234</td>-->
-                              <!--<td>4.3456600</td>-->
-                              <!--<td class="crypt-up">-9.6%</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                              <!--<th scope="row">XMR</th>-->
-                              <!--<td>0.0000567</td>-->
-                              <!--<td>4.3456600</td>-->
-                              <!--<td>-5.6%</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                              <!--<th scope="row">DOGE</th>-->
-                              <!--<td class="crypt-up">0.0000234</td>-->
-                              <!--<td>4.3456600</td>-->
-                              <!--<td class="crypt-up">-9.6%</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                              <!--<th scope="row">XMR</th>-->
-                              <!--<td>0.0000567</td>-->
-                              <!--<td>4.3456600</td>-->
-                              <!--<td>-5.6%</td>-->
-                            <!--</tr>-->
-                            <!--</tbody>-->
-                          <!--</table>-->
-                        <!--</div>-->
-                      </div>
-                    </div>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -127,11 +29,12 @@
         </div>
         <div class="col-xl-8 col-lg-8 col-md-8 d-none d-md-block d-lg-block">
           <ul class="crypt-heading-menu fright">
-          <li *ngIf="isLogin"><a routerLink="/dashboard">Home</a></li>
-            <li *ngIf="isLogin && scope"><a routerLink="/create-ehole">E-HOLE</a></li>
-            <li *ngIf="isLogin && !scope"><a routerLink="/invest-ehole">E-HOLE</a></li>
-            <li *ngIf="isLogin && scope"><a routerLink="/trade">Trading</a></li>
-            <li *ngIf="isLogin"><a routerLink="/account">Account</a></li>
+          <li *ngIf="isLogin" [routerLinkActive]="['active']"><a routerLink="/dashboard">Home</a></li>
+            <li *ngIf="isLogin && scope" [routerLinkActive]="['active']"><a routerLink="/create-ehole">E-HOLE</a></li>
+            <li *ngIf="isLogin && !scope" [routerLinkActive]="['active']"><a routerLink="/invest-ehole">E-HOLE</a></li>
+            <li *ngIf="isLogin && scope" [routerLinkActive]="['active']"><a routerLink="/trade">Trading</a></li>
+            <li *ngIf="isLogin" [routerLinkActive]="['active']"><a routerLink="/account">Account</a></li>
+            <li *ngIf="isLogin"><a (click)="logout()">Logout</a></li>
             <li *ngIf="!isLogin" class="crypt-box-menu menu-red"><a routerLink="/sign-up">register</a></li>
             <li *ngIf="!isLogin" class="crypt-box-menu menu-green"><a routerLink="/login">login</a></li>
           </ul>

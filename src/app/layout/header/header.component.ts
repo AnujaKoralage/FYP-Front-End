@@ -1,6 +1,7 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
 import {WalletService} from '../../shared/services/wallet.service';
 import {AuthService} from '../../shared/services/auth.service';
+import {NewHttpService} from '../../shared/services/custom.new.http.service';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,7 @@ import {AuthService} from '../../shared/services/auth.service';
 export class HeaderComponent implements OnInit, DoCheck {
 
   constructor(private walletService: WalletService,
+              private httpService: NewHttpService,
               private authService: AuthService) { }
 
   public isLogin;
@@ -17,12 +19,12 @@ export class HeaderComponent implements OnInit, DoCheck {
   public amount;
 
   ngOnInit() {
-    if (localStorage.getItem('scope') === 'role_trader') {
-      this.scope = true;
-    }
   }
 
   ngDoCheck(): void {
+    if (localStorage.getItem('scope') !== undefined && localStorage.getItem('scope') === 'role_trader') {
+      this.scope = true;
+    }
     if (localStorage.getItem('access_token') === null || localStorage.getItem('access_token') === undefined) {
       this.isLogin = false;
     } else {
@@ -39,6 +41,9 @@ export class HeaderComponent implements OnInit, DoCheck {
         this.amount = value.currentBalance;
       });
     }
+  }
+  logout() {
+    this.httpService.logout();
   }
 
 }

@@ -17,7 +17,12 @@ export class InvestEholeComponent implements OnInit {
   public eholeType = 0;
 
   ngOnInit() {
+    this.sendEhole();
+  }
+
+  sendEhole() {
     this.eholeService.getActiveEholes().subscribe(value => {
+      console.log(value)
       this.activeEholeArray = value;
       this.selectedEhole = value[0];
     });
@@ -41,11 +46,9 @@ export class InvestEholeComponent implements OnInit {
       eholeId: this.selectedEhole.id,
       amount: this.purchaseAmount
     };
+    let that = this;
     this.eholeService.investEhoel(params).subscribe(val => {
-      this.eholeService.getActiveEholes().subscribe(value => {
-        this.activeEholeArray = value;
-        this.selectedEhole = value[0];
-      });
+      that.sendEhole();
     });
   }
 

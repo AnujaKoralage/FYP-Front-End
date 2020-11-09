@@ -21,7 +21,7 @@ export class NewHttpService {
     public constructor(
         backend: HttpBackend,
         // defaultOptions: HttpHeaders,
-        router: Router,
+        private router: Router,
         injector: Injector,
         private http: HttpClient) {
 
@@ -164,23 +164,24 @@ export class NewHttpService {
 
     logout() {
         localStorage.clear();
+      this.router.navigate(['/login']);
         this.logoutUser(this.access_token).subscribe(
             (data) => {
-                window.location.replace('/');
+              this.router.navigate(['/login']);
             },
             (error) => {
-                window.location.replace('/');
+              this.router.navigate(['/login']);
             }
         );
     }
 
-    logoutUser(token) {
+    private logoutUser(token): Observable<any> {
         const headers = new HttpHeaders();
         headers.append('Authorization', 'Bearer ' + token);
 
         const url = URL_CONST.URL_PREFIX_AUTH + 'logout';
         const credentials = 'Authorization=Bearer ' + token;
 
-        return this.post(url, { Authorization: 'Bearer ' + token }, { headers });
+        return this.post(url, { headers });
     }
 }

@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   public passwordErrorMessage;
 
   ngOnInit() {
-    this.ddd();
+    // this.ddd();
   }
   public logIn() {
     this.httpN.getAccessToken(this.name, this.password).subscribe(value1 => {
