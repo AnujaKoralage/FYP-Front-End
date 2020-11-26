@@ -108,7 +108,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <a class="crypt-button-green-full" href="/create-ehole">Create New E-Hole </a>
+          <a *ngIf="role == 'role_trader'" class="crypt-button-green-full" href="/create-ehole">Create New E-Hole </a>
         </div>
       </div>
       <br>

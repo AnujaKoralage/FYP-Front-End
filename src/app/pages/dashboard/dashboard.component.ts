@@ -24,6 +24,7 @@ interface EholeObject {
 })
 
 export class DashboardComponent implements OnInit {
+  private role: string;
 
   constructor(private tradeService: TradeService,
               private eholeService: EholeService,
@@ -61,7 +62,7 @@ const that = this;
         });
       }
     });
-
+      this.role = localStorage.getItem('scope');
   }
 
 }

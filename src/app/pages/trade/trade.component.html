@@ -17,7 +17,15 @@
                 <option *ngFor="let it of pairs | keyvalue" [value]="it.value">{{it.key}}</option>
               </select>
 </div>
-      <div class="col-2"></div>
+      <div class="col-2">
+      <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Leverage</label>
+                    <select class="custom-select my-1 mr-sm-2" (change)="selectLeverage($event)" id="inlineFormCustomSelectPref">
+                      <option value="0">1 : 10</option>
+                      <option value="1">1 : 20</option>
+                      <option value="2">1 : 100</option>
+                      <option value="3">1 : 200</option>
+                    </select>
+</div>
       </div>
   </div>
   <div class="row sm-gutters">

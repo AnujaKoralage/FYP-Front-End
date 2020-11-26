@@ -168,34 +168,44 @@
                     <button [disabled]="amountError" class="crypt-button-green-full" (click)="withdrawAmountQ()">Initiate Withdraw</button>
                   </form>
                 </div>
-                <div class="tab-pane fade" id="v-pills-zilliqua-btc-history" role="tabpanel" aria-labelledby="v-pills-zilliqua-btc-history-tab">
+                <div style="height:250px; overflow:auto;" class="tab-pane fade" id="v-pills-zilliqua-btc-history" role="tabpanel" aria-labelledby="v-pills-zilliqua-btc-history-tab">
+                  <h4>Money Transactions</h4>
                   <table class="table table-striped">
                     <thead>
                     <tr>
-                      <th scope="col">Time</th>
+                      <th scope="col">Date</th>
                       <th scope="col">Amount</th>
-                      <th scope="col">Currency</th>
+                      <th scope="col">Transaction Type</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <th scope="row">22:35:59</th>
-                      <td class="crypt-down">0.000056</td>
-                      <td>BTC</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">22:35:59</th>
-                      <td>0.0000564</td>
-                      <td>ETH</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">22:35:59</th>
-                      <td>0.0000234</td>
-                      <td>XHO</td>
+                    <tr *ngFor="let dt of transactionArray ">
+                      <th scope="row">{{dt.createdDate}}</th>
+                      <td class="crypt-down">{{dt.amount}}</td>
+                      <td>{{dt.transactionType}}</td>
                     </tr>
                     </tbody>
                   </table>
                 </div>
+                <div style="height:250px; overflow:auto;"  id="v-pills-zilliqua-btc-history" role="tabpanel" aria-labelledby="v-pills-zilliqua-btc-history-tab">
+                <h4>E-Hole Transactions</h4>
+                          <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                      <th scope="col">E-Hole</th>
+                                      <th scope="col">Amount</th>
+                                      <th scope="col">Transaction Type</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let dt of eholeTransactionAray ">
+                                      <th scope="row">{{dt.userId}}</th>
+                                      <td class="crypt-down">{{dt.amount}}</td>
+                                      <td>{{dt.transactionType}}</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
               </div>
             </div>
           </div>

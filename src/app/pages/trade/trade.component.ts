@@ -16,6 +16,8 @@ declare const TradingView: any;
   styleUrls: ['./trade.component.scss']
 })
 export class TradeComponent implements OnInit, AfterViewInit {
+  private leverageEnum: any = 0;
+  private leverageValue: any;
 
   constructor(private chartService: ChartService,
               private tradeService: TradeService,
@@ -64,12 +66,12 @@ export class TradeComponent implements OnInit, AfterViewInit {
           for (let i = 0; i < this.currentEholeActiveOrders.length; i++) {
             // setInterval(() => {
               if (this.currentEholeActiveOrders[i].orderAction == OrderActionEnum.BUY) {
-                let profit = this.calculateProfit(this.currentEholeActiveOrders[i].startPrice, this.currentTicker[0].bid,
-                  this.currentEholeActiveOrders[i].orderSize, OrderActionEnum.BUY);
+                let profit = this.calculateProfit(this.currentEholeActiveOrders[i].startPrice, this.currentTicker[0].ask,
+                  this.currentEholeActiveOrders[i].orderSize, OrderActionEnum.BUY, this.currentEholeActiveOrders[i].leverageEnum);
                 this.currentEholeActiveOrders[i].profit = profit;
               } else {
-                let profit = this.calculateProfit(this.currentEholeActiveOrders[i].startPrice, this.currentTicker[0].ask,
-                  this.currentEholeActiveOrders[i].orderSize, OrderActionEnum.SELL);
+                let profit = this.calculateProfit(this.currentEholeActiveOrders[i].startPrice, this.currentTicker[0].bid,
+                  this.currentEholeActiveOrders[i].orderSize, OrderActionEnum.SELL, this.currentEholeActiveOrders[i].leverageEnum);
                 this.currentEholeActiveOrders[i].profit = profit;
               }
             // }, 2000);
@@ -180,6 +182,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
       size: this.sellAmount,
       orderAction: 1,
       orderType: this.sellOrderType,
+      leverageEnum: this.leverageEnum,
       symbolId: id,
       eholeId: this.selectedEhole.id
     };
@@ -205,6 +208,7 @@ export class TradeComponent implements OnInit, AfterViewInit {
       size: this.buyAmount,
       orderAction: 0,
       orderType: this.sellOrderType,
+      leverageEnum: this.leverageEnum,
       symbolId: id,
       eholeId: this.selectedEhole.id
     };
@@ -251,19 +255,49 @@ export class TradeComponent implements OnInit, AfterViewInit {
   setBuyOrderType(event) {
     this.buyOrderType = event.target.value;
   }
-  calculateProfit(startPrice, endPrice, orderSize, type) {
+  calculateProfit(startPrice, endPrice, orderSize, type, leverage) {
+    let leverageValue;
     if (type == OrderActionEnum.BUY) {
       let baceCurBuyUnits = orderSize / startPrice;
       let baceCurSSellUnits = baceCurBuyUnits * endPrice;
       let profitQuantity = baceCurSSellUnits - orderSize;
-      return profitQuantity;
+      if (leverage == 'LEV1') {
+        leverageValue = 1000;
+      }
+      if (leverage == 'LEV2') {
+        leverageValue = 2000;
+      }
+      if (leverage == 'LEV3') {
+        leverageValue = 10000;
+      }
+      if (leverage == 'LEV4') {
+        leverageValue = 20000;
+      }
+      console.log(profitQuantity * leverageValue)
+      return (profitQuantity * leverageValue);
     } else {
       let sellBaseCurQty = orderSize / startPrice;
       let sellQotCurQty = orderSize / endPrice;
       let profitInBaseCur = sellQotCurQty - sellBaseCurQty;
       let profit = profitInBaseCur / endPrice;
-      return profit;
+      if (leverage == 'LEV1') {
+        leverageValue = 1000;
+      }
+      if (leverage == 'LEV2') {
+        leverageValue = 2000;
+      }
+      if (leverage == 'LEV3') {
+        leverageValue = 10000;
+      }
+      if (leverage == 'LEV4') {
+        leverageValue = 20000;
+      }
+      console.log(profit * leverageValue)
+      return (profit * leverageValue);
     }
   }
 
+  selectLeverage(event) {
+    this.leverageEnum = event.target.value;
+  }
 }

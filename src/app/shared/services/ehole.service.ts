@@ -34,4 +34,8 @@ export class EholeService {
     return this.http.get(URL_CONST.URL_PREFIX_EHOLE + 'ehole/active/' + EholeTypeEnum.FINISHED,
       this.commonService.getDefaultOptions());
   }
+  getUserTransactions() {
+    return this.http.get(URL_CONST.URL_PREFIX_EHOLE + 'ehole/transactions',
+      this.commonService.getDefaultOptions());
+  }
 }

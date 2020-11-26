@@ -24,5 +24,8 @@ export class PaymentService {
     return this.http.get(URL_CONST.URL_PREFIX_PAYMENT + 'payment/pay/success?paymentId=' + paymentId + '&PayerID=' +
                               payerId + '&transactionId=' + transactionId, this.commonService.getDefaultOptions());
     }
+  getUserTransactions() {
+    return this.http.get(URL_CONST.URL_PREFIX_PAYMENT + 'payment/history', this.commonService.getDefaultOptions());
+  }
 
 }

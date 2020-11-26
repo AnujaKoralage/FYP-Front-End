@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PaymentService} from '../../shared/services/payment.service';
 import {WalletService} from '../../shared/services/wallet.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {EholeService} from '../../shared/services/ehole.service';
+import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import NumberFormat = Intl.NumberFormat;
-import NumberFormatOptions = Intl.NumberFormatOptions;
-import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-account',
@@ -14,20 +12,24 @@ import {Subject} from 'rxjs';
 })
 export class AccountComponent implements OnInit {
 
-  constructor(private paymentService: PaymentService,
-              private http: HttpClient,
-              private router: Router,
-              private walletService: WalletService) { }
-
   public amount;
-  private transactionId = null;
-  private paymentUrl = null;
   public name = '';
   public amountError = false;
   public amountErrorMessage = '';
   public emaill = '';
   public withdrawAmount;
   public curentAmount;
+  public transactionArray = [];
+  private transactionId = null;
+  private paymentUrl = null;
+  private eholeTransactionAray = [];
+
+  constructor(private paymentService: PaymentService,
+              private http: HttpClient,
+              private router: Router,
+              private walletService: WalletService,
+              private eholeService: EholeService) {
+  }
 
   ngOnInit() {
     if (localStorage.getItem('scope') === 'role_investor') {
@@ -40,10 +42,18 @@ export class AccountComponent implements OnInit {
       });
     }
 
+    this.paymentService.getUserTransactions().subscribe(value => {
+      this.transactionArray = value;
+    });
+    this.eholeService.getUserTransactions().subscribe(value => {
+      this.eholeTransactionAray = value;
+    });
   }
+
   setAmount(event) {
     this.amount = event.target.value;
   }
+
   proceedPayment() {
     if (this.amount !== 0 && this.amount !== null) {
       const params = {
@@ -61,6 +71,7 @@ export class AccountComponent implements OnInit {
       });
     }
   }
+
   validateWithdrawAmount() {
     if (this.withdrawAmount === 0) {
       this.amountError = true;
@@ -74,6 +85,7 @@ export class AccountComponent implements OnInit {
       }
     }
   }
+
   withdrawAmountQ() {
     if (!this.amountError) {
       const params = {
